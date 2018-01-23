@@ -1,7 +1,7 @@
 # Installation
 
 ```
-$ git clone git@github.com:shahzad-saddam/laravel--backpack-ready.git
+$ git clone git@github.com:shahzad-saddam/laravel-backpack-ready.git
 
 $ cp .env.example .env # and then set your database configurations
 $ composer install # to install all packages
