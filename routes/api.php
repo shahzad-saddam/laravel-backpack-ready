@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// forgot and reset routes
+Route::post('forgot', 'Auth\ForgotPasswordController@getResetToken');
+Route::post('reset', 'Auth\ResetPasswordController@reset');
+Route::post('login', 'Api\AuthController@login');
+Route::post('register', 'Api\AuthController@register');
+
+Route::group(['as' => 'api.', 'namespace' => 'Api', 'middleware' => 'auth:api'], function () {
+
+    Route::get('users/me', 'UserController@show')->name('user.show');
+    Route::post('users/me', 'UserController@update')->name('user.update');
 });
+
