@@ -9,10 +9,10 @@
         "backpack/base": "^0.8.7",
         "backpack/crud": "^3.3",
         "backpack/langfilemanager": "^1.0",
+        "backpack/permissionmanager": "^2.1",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",
-        "spatie/laravel-permission": "^2.7"
+        "laravel/tinker": "~1.0"
     },
     "require-dev": {
         "backpack/generators": "^1.1",
