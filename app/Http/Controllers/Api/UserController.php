@@ -3,84 +3,48 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\Api\UserUpdateRequest;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends ApiController
 {
 
     /**
-     * @param Request $request
-     *
      * @return User
      */
-    public function show(Request $request)
+    public function show()
     {
-        $user = Auth::user();
-
-        return response()->json([
-            'status'   => $this->SUCCESS,
-            'response' => $user
-        ], $this->SUCCESS);
+        return Auth::user();
     }
 
     /**
-     * @param Request $request
-     *
+     * @param UserUpdateRequest $request
      * @return User
+     * @throws \Throwable
      */
-    public function update(Request $request)
+    public function update(UserUpdateRequest $request)
     {
-        try {
+        return DB::transaction(function () use ($request) {
+            $attributes = $request->only([
+                'name',
+                'email',
+                'country_code',
+            ]);
 
-            /** @var User $user */
-            $user = Auth::user();
-
-            $rules = [
-                'name'     => 'required',
-                'email'    => "required|email|unique:users,email,{$user->getKey()},{$user->getKeyName()}",
-                'password' => 'sometimes|nullable|confirmed|min:8'
-            ];
-
-            $validator = Validator::make($this->inputs, $rules);
-
-            if ($validator->fails()) {
-                \Log::info('User update failed');
-
-                return response()->json(
-                    [
-                        'status'   => $this->EXPECTATION_FAILED,
-                        'response' => $validator->messages(),
-                        'reason'   => $this->getReason($validator->messages()),
-                    ], $this->EXPECTATION_FAILED
-                );
-            } else {
-
-                $user->name = $request->input('name');
-                $user->email = $request->input('email');
-
-                if ($password = $request->input('password')) {
-                    $user->password = bcrypt($password);
-                }
-
-
-                $user->saveOrFail();
-
-                return response()->json([
-                    'status'   => $this->SUCCESS,
-                    'response' => $user
-                ], $this->SUCCESS);
+            if (!empty($password = $request->input('password'))) {
+                $attributes['password'] = Hash::make($password);
             }
 
+            $user = Auth::user();
 
-        } catch (\Exception $ex) {
+            if (!$user->update($attributes)) {
+                abort(500);
+            }
 
-            $errorMessage = $ex->getMessage();
-            \Log::error($errorMessage);
-            $this->sendUnknownError($errorMessage);
-
-        }
+            return $user;
+        });
     }
 }

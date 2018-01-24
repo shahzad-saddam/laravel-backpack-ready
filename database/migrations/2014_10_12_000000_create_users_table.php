@@ -17,7 +17,12 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('validation_code')->nullable();
+            $table->boolean('validated')->default(false);
+            $table->string('locale')->default(Config::get('app.locale'));
+            $table->boolean('admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

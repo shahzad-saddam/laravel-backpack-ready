@@ -12,8 +12,14 @@
         "backpack/permissionmanager": "^2.1",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/passport": "^4.0",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "leodido/langcode-conv": "^0.2.0",
+        "overtrue/laravel-lang": "^3.0",
+        "pragmarx/countries": "^0.1.1",
+        "propaganistas/laravel-phone": "^3.0",
+        "tymon/jwt-auth": "1.0.0-rc.1",
+        "barryvdh/laravel-cors": "^0.11.0",
+        "doctrine/dbal": "^2.6"
     },
     "require-dev": {
         "backpack/generators": "^1.1",
