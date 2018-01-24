@@ -106,6 +106,7 @@ class AuthController extends ApiController
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+        event(new Registered($user));
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['name'] = $user->name;
 
