@@ -17,3 +17,30 @@ $ php artisan migrate --path=vendor/backpack/langfilemanager/src/database/migrat
 $ php artisan db:seed --class="Backpack\LangFileManager\database\seeds\LanguageTableSeeder"
 ```
 
+
+
+# Usage
+
+Steps to generate a crud 
+### STEP 1. create migration and run it
+```
+$ php artisan make:migration:schema create_tags_table --model=0 --schema="name:string:unique"
+$ php artisan migrate
+```
+
+### STEP 2. create a model, a request and a controller for the admin panel
+```
+$ php artisan backpack:crud tag #use singular, not plural
+```
+
+### STEP 3. manually add this to your routes.php file (under the admin prefix and auth middleware):
+```
+CRUD::resource('tag', 'TagCrudController'); 
+
+# For example:
+# Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin'], 'namespace' => 'Admin'], function()
+# {
+#    CRUD::resource('tag', 'TagCrudController');
+# });
+```
+
