@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'nextcuisine.apps@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Dermatude'),
+        'name' => env('MAIL_FROM_NAME', 'YourAppName'),
     ],
 
     /*
