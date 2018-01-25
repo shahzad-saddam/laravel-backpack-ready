@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +25,6 @@ Route::prefix('auth')
         Route::post('forgot/reset', 'AuthController@reset')->name('forgot.reset');
         Route::post('validate', 'AuthController@validateEmail')->name('validate');
         Route::post('validate/resend', 'AuthController@validateResend')->name('validate.resend');
-        Route::post('social/{provider}', 'AuthController@social')->name('social');
     });
 
 Route::resource('country', 'CountryController', ['only' => ['index', 'show']]);

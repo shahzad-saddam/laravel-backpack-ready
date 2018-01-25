@@ -32,8 +32,8 @@ class LoginRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => trans('models/user.email'),
-            'password' => trans('models/user.password'),
+            'email' => trans('app.user.email'),
+            'password' => trans('app.user.password'),
         ];
     }
 }

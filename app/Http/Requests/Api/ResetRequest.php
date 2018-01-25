@@ -33,10 +33,10 @@ class ResetRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => trans('models/user.email'),
-            'token' => trans('app.reset_token'),
-            'password' => trans('models/user.password'),
-            'password_confirmation' => trans('models/user.password_confirmation'),
+            'email' => trans('app.user.email'),
+            'token' => trans('app.user.reset_token'),
+            'password' => trans('app.user.password'),
+            'password_confirmation' => trans('app.user.password_confirmation'),
         ];
     }
 }

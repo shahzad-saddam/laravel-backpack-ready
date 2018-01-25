@@ -31,7 +31,7 @@ class ForgotRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => trans('models/user.email'),
+            'email' => trans('app.user.email'),
         ];
     }
 }
