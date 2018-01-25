@@ -33,14 +33,8 @@ $ php artisan migrate
 $ php artisan backpack:crud tag #use singular, not plural
 ```
 
-### STEP 3. manually add this to your routes.php file (under the admin prefix and auth middleware):
+### STEP 3. manually add this to your admin.php routes file:
 ```
 CRUD::resource('tag', 'TagCrudController'); 
-
-# For example:
-# Route::group(['prefix' => config('backpack.base.route_prefix'), 'middleware' => ['admin'], 'namespace' => 'Admin'], function()
-# {
-#    CRUD::resource('tag', 'TagCrudController');
-# });
 ```
 
